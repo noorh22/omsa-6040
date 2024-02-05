@@ -102,16 +102,41 @@ v = ('-', '1.000000', -2)
 assert add_fp_bin(u, v, 7) == ('+', '1.000010', 0)
 
 # PART 1
+# Excercise 0
+def alg_sum(x): # x == x[:n]
+    s = 0.
+    for x_i in x: # x_0, x_1, \ldots, x_{n-1}
+        s += x_i
+    return s
+
+
 N = [10, 100, 1000, 10000, 100000, 1000000, 10000000]
 # Initialize an array t of size len(N) to all zeroes.
 t = [0.0] * len(N)
 
-# Your code should do the experiment described above for
-# each problem size N[i], and store the computed sum in t[i].
-
-###
-### YOUR CODE HERE
-###
+for i in range(len(N)):
+    x = [0.1 * N[i]]
+    r = alg_sum(x)
+    print(r)
+    t[i] = r
 
 print(t)
-print("noor")
+
+#Excercise 2
+
+def alg_sum_accurate(nums):
+    assert type(nums) is list
+    partials = []  # sorted, non-overlapping partial sums
+    for x in nums:
+        i = 0
+        for y in partials:
+            if abs(x) < abs(y):
+                x, y = y, x
+            hi = x + y
+            lo = y - (hi - x)
+            if lo:
+                partials[i] = lo
+                i += 1
+            x = hi
+        partials[i:] = [x]
+    return sum(partials, 0.0)
