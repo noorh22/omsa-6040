@@ -1,3 +1,4 @@
+# NOTEBOOK 1 - PYTHON BASICS
 # PART 0
 def strcat_ba(a, b):
     assert type(a) is str, f"Input argument `a` has `type(a)` is {type(a)} rather than `str`"
